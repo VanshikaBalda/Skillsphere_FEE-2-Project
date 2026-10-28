@@ -230,8 +230,8 @@ function Habits() {
 
   const completionRate = scheduledHabits.length
     ? Math.round(
-      (completedCount / scheduledHabits.length) * 100
-    )
+        (completedCount / scheduledHabits.length) * 100
+      )
     : 0;
 
   const weeklyStats = weekDates.map((date) => {
@@ -392,18 +392,18 @@ function Habits() {
         items.map((habit) =>
           habit.id === editingId
             ? {
-              ...createHabit(
-                {
-                  ...form,
-                  completedDates: habit.completedDates,
-                  done: habit.done,
-                  paused: habit.paused,
-                  archived: habit.archived,
-                },
-                habit.id
-              ),
-              completedDates: habit.completedDates || [],
-            }
+                ...createHabit(
+                  {
+                    ...form,
+                    completedDates: habit.completedDates,
+                    done: habit.done,
+                    paused: habit.paused,
+                    archived: habit.archived,
+                  },
+                  habit.id
+                ),
+                completedDates: habit.completedDates || [],
+              }
             : habit
         )
       );
@@ -468,7 +468,9 @@ function Habits() {
       })
     );
 
-
+    if (!wasCompleted) {
+      notify("Great job! Habit completed.");
+    }
   };
 
   const deleteHabit = (id) => {
@@ -633,8 +635,9 @@ function Habits() {
               <button
                 type="button"
                 key={key}
-                className={`habits-day ${selectedDate === key ? "is-selected" : ""
-                  } ${key === today ? "is-today" : ""}`}
+                className={`habits-day ${
+                  selectedDate === key ? "is-selected" : ""
+                } ${key === today ? "is-today" : ""}`}
                 onClick={() => setSelectedDate(key)}
                 aria-pressed={selectedDate === key}
               >
@@ -888,11 +891,11 @@ function Habits() {
               {selectedDate === today
                 ? "Your habits"
                 : `Habits for ${dateFromKey(
-                  selectedDate
-                ).toLocaleDateString(undefined, {
-                  month: "short",
-                  day: "numeric",
-                })}`}
+                    selectedDate
+                  ).toLocaleDateString(undefined, {
+                    month: "short",
+                    day: "numeric",
+                  })}`}
             </h2>
             <p className="muted small">
               Your habit updates are saved automatically.
@@ -1052,8 +1055,9 @@ function Habits() {
             {achievements.map((achievement) => (
               <div
                 key={achievement.title}
-                className={`habits-badge ${achievement.unlocked ? "unlocked" : "locked"
-                  }`}
+                className={`habits-badge ${
+                  achievement.unlocked ? "unlocked" : "locked"
+                }`}
               >
                 <span>
                   {achievement.unlocked
